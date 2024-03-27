@@ -255,10 +255,11 @@ func (p *Pinger) logStats(stats *Stats) {
 		status = "connected"
 	}
 
+	curTimeStr := time.Now().Format("2006-01-02 15:04:05")
 	if stats.Error != nil {
-		_, _ = fmt.Fprintf(p.out, "Ping %s(%s) %s(%s) - time=%s dns=%s", p.url.String(), stats.Address, status, p.formatError(stats.Error), stats.Duration, stats.DNSDuration)
+		_, _ = fmt.Fprintf(p.out, "[%s]: Ping %s(%s) %s(%s) - time=%s dns=%s", curTimeStr, p.url.String(), stats.Address, status, p.formatError(stats.Error), stats.Duration, stats.DNSDuration)
 	} else {
-		_, _ = fmt.Fprintf(p.out, "Ping %s(%s) %s - time=%s dns=%s", p.url.String(), stats.Address, status, stats.Duration, stats.DNSDuration)
+		_, _ = fmt.Fprintf(p.out, "[%s]: Ping %s(%s) %s - time=%s dns=%s", curTimeStr, p.url.String(), stats.Address, status, stats.Duration, stats.DNSDuration)
 	}
 	if len(stats.Meta) > 0 {
 		_, _ = fmt.Fprintf(p.out, " %s", stats.FormatMeta())
