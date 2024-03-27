@@ -138,6 +138,7 @@ var rootCmd = cobra.Command{
 		}
 		pinger.Stop()
 		pinger.Summarize()
+		fmt.Println()
 	},
 }
 
